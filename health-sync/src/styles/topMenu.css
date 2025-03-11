@@ -1,0 +1,58 @@
+.topMenu {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-right: 1rem;
+}
+.topSearch {
+  font-weight: regular;
+  font-size: 18px;
+  position: relative;
+  color: #aca8a8;
+  cursor: pointer;
+  border: none;
+  /* width: 13rem; */
+  width: auto;
+  height: 2rem;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+}
+
+.topMenu > .topSearch > .searchBar {
+  width: 100%; 
+  height: 100%;
+  border: solid 1px #aca8a8;
+  display: flex;
+  position: relative;
+  padding-left: 40px;
+  gap: 10px;
+  background-color: #f9fffe;
+  border-radius: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+  font-size: 18px;
+}
+.topMenu > .topSearch > .searchBar:focus {
+  border-color: rgb(38, 161, 150); 
+  outline: none;
+}
+.topMenu > .topSearch > .searchIcon {
+  width: 25px;
+  height: 28px;
+  position: absolute;
+  left: 10px;
+  z-index: 100;
+}
+
+.topMenu > .avatar {
+  width: 35px;
+  height: 40px;
+}
+@media (min-width: 376px){
+ 
+ .topMenu {
+  .topSearch {
+    width: 25rem;
+  }
+ }
+}

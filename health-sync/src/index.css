@@ -1,0 +1,246 @@
+ html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+} 
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jaldi:wght@400;700&family=Kufam:ital,wght@0,400..900;1,400..900&family=Manrope:wght@200..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+:root {
+  --maingreen: html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5,
+    h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
+    em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b,
+    u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table,
+    caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details,
+    embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby,
+    section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+
+  /* HTML5 display-role reset for older browsers */
+  article,
+  aside,
+  details,
+  figcaption,
+  figure,
+  footer,
+  header,
+  hgroup,
+  menu,
+  nav,
+  section {
+    display: block;
+  }
+
+  body {
+    line-height: 1;
+  }
+
+  ol,
+  ul {
+    list-style: none;
+  }
+
+  blockquote,
+  q {
+    quotes: none;
+  }
+
+  blockquote:before,
+  blockquote:after,
+  q:before,
+  q:after {
+    content: "";
+    content: none;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  } */
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jaldi:wght@400;700&family=Kufam:ital,wght@0,400..900;1,400..900&family=Manrope:wght@200..800&display=swap');
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jaldi:wght@400;700&family=Kufam:ital,wght@0,400..900;1,400..900&family=Manrope:wght@200..800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+ 
+ 
+
+  
+  /* let header.css work for Global */
+  @import "./styles/header.css";
+  @import "./styles/topMenu.css";
+  :root {
+    --mainGreen: rgb(38, 161, 150);
+    --Background-lightGreen: rgb(249, 255, 254);
+    --Background-DarkerGreen: rgb(235, 253, 251);
+    --mainBackground: #fff;
+    --ButtonBackground: rgb(38, 161, 150);
+    --borderGreg: rgb(234, 225, 225);
+    --textColorDark: #000;
+    --textColorLight: #fff;
+    --textContentFontFamily: "Kufam";
+
+  }
+
+  body {
+    font-family: "Inter", serif;
+  background-color: #fff;
+  }
+
+  button {
+    background-color: var(--ButtonBackground);
+    border: none;
+    width: max-content;
+  }
+
+  .container {
+    max-width: 1594px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  a {
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  p {
+    line-height: 1.4rem;
+  }
+}

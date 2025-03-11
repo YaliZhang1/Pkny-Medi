@@ -1,0 +1,23 @@
+.appointPage-container {
+  .nav-appintContent-container {
+  
+    display: grid;
+    grid-template-columns: 0.5fr 2fr;
+    .pageNavigate {
+      .leftNavigationContainer {
+        display: none;
+      }
+    }
+  }
+}
+@media (min-width: 376px) {
+  .nav-appintContent-container {
+    display: grid;
+    grid-template-rows: 0.5fr 3fr;
+    .pageNavigate {
+      .leftNavigationContainer {
+        display: flex !important;
+       height: 88vh;
+    }
+  }
+}}

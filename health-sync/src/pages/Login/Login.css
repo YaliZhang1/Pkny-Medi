@@ -1,0 +1,92 @@
+.page-container2 {
+  background: rgb(235, 253, 251);
+  background-image: url("../../assets/images/login.png");
+  background-size: 100% 100%;
+  background-position: 0 -13em;
+  display: grid;
+  padding: 4.7rem 2rem;
+  grid-template-rows: 4fr 2.5fr 4.5fr;
+  gap: 1rem;
+
+  .head-text {
+    h1 {
+      padding-top: 12rem;
+      font-weight: 800;
+      font-size: 2.3rem;
+      color: #555b6c;
+      text-shadow: 2px 2px 2px rgb(46, 196, 182, 0.8);
+    }
+    p {
+      color: #2ec4b6;
+      padding: 1rem 0rem;
+      font-size: 1.1rem;
+    }
+  }
+  .inputBox {
+    h3 {
+      padding: 0.5rem 0rem 1rem;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: #555b6c;
+      text-shadow: 2px 2px 2px rgb(46, 196, 182, 0.8);
+    }
+    input {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 1rem 1rem;
+      border-radius: 20px;
+      border: 2px solid #2ec4b6;
+      outline: none;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      &:focus {
+        border: 2px solid rgb(234, 225, 225);
+      }
+    }
+  }
+  button {
+    width: 10.29rem;
+    height: 2.438rem;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 376px) {
+  .page-container2 {
+    background-size: 100% 120%;
+    background-position: 0em -12em;
+    padding: 0rem 2rem;
+    height: 100vh;
+
+    .head-text {
+      width: 35rem;
+      min-width: 35rem;
+      text-align: start;
+      margin: 0 auto;
+      padding-top: 2rem;
+      h1 {
+        font-size: 2.8rem;
+        font-weight: 1000;
+      }
+      p {
+        font-size: 1.8rem;
+        padding-top: 2rem;
+      }
+    }
+    .inputBox {
+      width: 35rem;
+      text-align: start;
+      margin: 0 auto;
+      h3 {
+        font-size: 1.5rem;
+      }
+    }
+
+    button {
+      width: 13.625rem;
+      height: 3.57rem;
+      font-size: 1.3rem;
+    }
+  }
+}

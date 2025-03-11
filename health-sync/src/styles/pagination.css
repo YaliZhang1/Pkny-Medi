@@ -1,0 +1,26 @@
+.pagination {
+  display: flex;
+  gap: 0.3rem;
+  justify-content:end;
+  margin-right: 1rem;
+  padding-top: 0.5rem;
+  .page-btn {
+    background-color: #fff;
+    border: 1px solid #eee;
+    padding: 0.2rem 0.5rem;
+    color: #26a196;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .page-btn:hover {
+    background-color: #ddd;
+  }
+
+  .page-btn.active {
+    background-color: #eee;
+
+    font-weight: bold;
+    cursor: default;
+  }
+}
