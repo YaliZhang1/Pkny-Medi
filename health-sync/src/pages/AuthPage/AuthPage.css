@@ -7,7 +7,23 @@
   padding: 4.7rem 2rem;
   grid-template-rows: 4fr 2.5fr 4.5fr;
   gap: 1rem;
+  .tab-buttons {
+    display: flex;
+    justify-content: center;
 
+    button {
+      border: none;
+      color: rgb(38, 161, 150);
+      padding: 1rem 1rem;
+      cursor: pointer;
+      border-radius: 20px;
+      transition: background-color 0.3s ease;
+      &:hover {
+        background-color: rgb(110, 234, 223);
+        color: white;
+      }
+    }
+  }
   .head-text {
     h1 {
       padding-top: 12rem;
