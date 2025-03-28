@@ -9,6 +9,7 @@ import "./Dashboard.css";
 import "../../styles/button.css";
 import Header from "../../components/Header";
 import { getPatients } from "../../api/fetchPatients";
+import { fetchPatientsData } from "../../api/fetchPatientsData";
 
 import PatientForm from "../../components/PatientForm";
 import LeftNavigation from "../../components/LeftNavigation";
@@ -26,30 +27,30 @@ export default function Dashboard() {
   const handleMobileMenuClick = () => {
     navigate("/mobileMenuPage");
   };
-  const handleSeeMoreBtn = ()=>{
+  const handleSeeMoreBtn = () => {
     navigate("/appointmentPage");
-  }
-
-  useEffect(() => {
-    fetchRandomPatients();
-  }, []); // Get data when page loads
-
-  const fetchRandomPatients = async () => {
-    const data = await getPatients();
-    const shuffledData = shuffleArray(data);
-    const sortedData = sortPatientsByTime(shuffledData);
-    const paginatedData = paginateData(sortedData, pageSize); // Paginate
-
-    setAllPatients(paginatedData);
-    setPatients(paginatedData[currentPage] || []); // Set current page data
   };
+
   const handleAddNewPatient = (newPatient) => {
-    setPatients([newPatient, ...patients]); // add to front
+    setPatients((prevPatients) => [newPatient, ...prevPatients]); // 添加到前面
   };
+  // useEffect(() => {
+  //   setPatients((prev) => {
+  //     const sortedPatients = sortPatientsByTime(prev);
+  //     // 只有在排序后数据发生变化时才更新 state，避免死循环
+  //     return JSON.stringify(prev) === JSON.stringify(sortedPatients) ? prev : sortedPatients;
+  //   });
+  // }, []);
+  useEffect(() => {
+    const fetchPatients = async () => {
+      const data = await fetchPatientsData();
+      console.log("Patients fetched:", data);
+      setAllPatients(paginateData(data, pageSize));
+      setPatients(data.slice(0, pageSize)); // 只设置当前页的数据
+    };
 
-  const shuffleArray = (array) => {
-    return [...array].sort(() => Math.random() - 0.5); //Copy the array and scramble it
-  };
+    fetchPatients();
+  }, []);
 
   const sortPatientsByTime = (patients) => {
     return [...patients].sort((a, b) => {
@@ -74,7 +75,7 @@ export default function Dashboard() {
   const handleDateChange = (date) => {
     setSelectedDate(date);
     setCurrentPage(1);
-    fetchRandomPatients();
+
     setIsModalOpen(false);
   };
 
@@ -120,20 +121,22 @@ export default function Dashboard() {
               </ul>
             </div>
             <ul className="patients">
-              {patients.length > 0 ? (
-                patients.map((user, index) => (
+              {patients && patients.length > 0 ? (
+                patients.map((patient, index) => (
                   <li key={index} className="patient-card ">
                     <div className="item">
-                      {new Date(user.registered.date).toLocaleTimeString([], {
+                      {new Date(
+                        patient?.registered?.date || new Date()
+                      ).toLocaleTimeString([], {
                         hour: "2-digit",
                         minute: "2-digit",
                       })}
                     </div>
                     <div className="item">
-                      {user.name.first} {user.name.last}
+                      {patient?.patientName || "Unknown"}
                     </div>
                     <div className="item numberForBigView">
-                      {user.location.postcode} 
+                      {patient?.patientID || "N/A"}
                     </div>
                     <img className="item" src="./send-sqaure.png" alt="" />
                     <div className="small-icons item">
@@ -151,19 +154,13 @@ export default function Dashboard() {
             <Button className="seeMore button" onClick={handleSeeMoreBtn}>
               See More
             </Button>
-            {/* <div className="paginationContainer">
-              <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-              />
-            </div> */}
           </div>
           <div className="taskContainer">
             <h1> Add Your Task To The Schedule </h1>
             <div className="task">
               <div className="taskContent">
                 <PatientForm onAddPatient={handleAddNewPatient} />
+
                 <div className="journalContainer">
                   <div className="medicalJournal">
                     <img
@@ -175,11 +172,7 @@ export default function Dashboard() {
                   </div>
                   <div className="JournalFirstRow-bigView mOneRow">
                     <p className="JournalText">Medical Journal</p>
-                    <img
-                      className="fileIcon"
-                      src="./file-text.png"
-                      alt=""
-                    />
+                    <img className="fileIcon" src="./file-text.png" alt="" />
                   </div>
                   <div className="JournalSecondRow-bigView mOneRow">
                     <p className="JournalText">Treatment</p>
