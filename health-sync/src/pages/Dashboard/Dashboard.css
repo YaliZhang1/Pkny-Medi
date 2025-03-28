@@ -97,6 +97,13 @@
           padding-top: 1rem;
           padding-bottom: 1rem;
           .patient-card {
+            .item {
+              .toggleFileButton {
+                .toggleFileIcon {
+                  cursor: pointer;
+                }
+              }
+            }
             .numberForBigView {
               display: none;
             }

@@ -8,7 +8,7 @@ import { CalendarIcon } from "lucide-react";
 import "./Dashboard.css";
 import "../../styles/button.css";
 import Header from "../../components/Header";
-import { getPatients } from "../../api/fetchPatients";
+
 import { fetchPatientsData } from "../../api/fetchPatientsData";
 
 import PatientForm from "../../components/PatientForm";
@@ -20,6 +20,9 @@ export default function Dashboard() {
   const [allPatients, setAllPatients] = useState({}); //Store paginated data
   const [patients, setPatients] = useState([]); //Current page data
   const [currentPage, setCurrentPage] = useState(1);
+  const [personalFileVisible, setPersonalFileVisible] = useState({});
+  const [currentPatientID, setCurrentPatientID] = useState(null);
+
   const pageSize = 5;
   const totalPages = 5;
 
@@ -31,9 +34,6 @@ export default function Dashboard() {
     navigate("/appointmentPage");
   };
 
-  const handleAddNewPatient = (newPatient) => {
-    setPatients((prevPatients) => [newPatient, ...prevPatients]); // 添加到前面
-  };
   // useEffect(() => {
   //   setPatients((prev) => {
   //     const sortedPatients = sortPatientsByTime(prev);
@@ -48,9 +48,32 @@ export default function Dashboard() {
       setAllPatients(paginateData(data, pageSize));
       setPatients(data.slice(0, pageSize)); // 只设置当前页的数据
     };
-
     fetchPatients();
   }, []);
+
+  const handleAddNewPatient = async (newPatient) => {
+    setPatients((prevPatients) => [newPatient, ...prevPatients]);
+
+    // 重新拉取数据，确保数据同步
+    const updatedPatients = await fetchPatientsData();
+    setPatients(updatedPatients);
+  };
+
+  const togglePersonalFile = (patientID) => {
+    if (currentPatientID === patientID) {
+    setPersonalFileVisible((prev) => ({
+      ...prev,
+      [patientID]: !prev[patientID], // Toggle the visibility
+    }));
+    
+      setCurrentPatientID(null); // 如果点击的图标已经显示，关闭该病人的文件
+    } else {
+      setCurrentPatientID(patientID); // 如果点击的图标是新的病人，显示该病人的文件
+      setPersonalFileVisible((prev) => ({
+        ...prev,
+        [patientID]: true,
+      }));}
+  };
 
   const sortPatientsByTime = (patients) => {
     return [...patients].sort((a, b) => {
@@ -75,7 +98,6 @@ export default function Dashboard() {
   const handleDateChange = (date) => {
     setSelectedDate(date);
     setCurrentPage(1);
-
     setIsModalOpen(false);
   };
 
@@ -109,7 +131,7 @@ export default function Dashboard() {
               </Button>
             </div>
           </div>
-          <div className="sheet">
+          <div style={{ position: "relative" }} className="sheet">
             <div className="sheetHead">
               <ul className="oneRow">
                 <li>Time</li>
@@ -122,8 +144,8 @@ export default function Dashboard() {
             </div>
             <ul className="patients">
               {patients && patients.length > 0 ? (
-                patients.map((patient, index) => (
-                  <li key={index} className="patient-card ">
+                patients.map((patient) => (
+                  <li key={patient.patientID} className="patient-card ">
                     <div className="item">
                       {new Date(
                         patient?.registered?.date || new Date()
@@ -138,7 +160,53 @@ export default function Dashboard() {
                     <div className="item numberForBigView">
                       {patient?.patientID || "N/A"}
                     </div>
-                    <img className="item" src="./send-sqaure.png" alt="" />
+
+                    <div className="item">
+                      {/* Display button to toggle personal file */}
+                      <button
+                        onClick={() => togglePersonalFile(patient.patientID)}
+                        className="toggleFileButton"
+                      >
+                        <img
+                          src="./messages.svg" // 使用相同的图标
+                          alt="Toggle File"
+                          className="toggleFileIcon"
+                          style={{
+                            borderRadius: "5px",
+                            backgroundColor: personalFileVisible[
+                              patient.patientID
+                            ]
+                              ? "#FF6B6B" 
+                              : "rgb(38, 161, 150)", 
+                            transition: "filter 0.3s ease", // 平滑过渡
+                          }}
+                        />
+                      </button>
+
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "8vh",
+                          right: "0",
+                          width: "25%",
+                          height: "40%",
+                          backgroundColor: personalFileVisible[
+                            patient.patientID
+                          ]
+                            ? "rgba(240, 240, 240, 0.95)"
+                            : "transparent", // 如果信息不显示，去掉背景色
+                          padding: "10px",
+                          borderRadius: "5px",
+                          zIndex: 1,
+                        }}
+                      >
+                        {/* Conditionally display Personal File */}
+                        {currentPatientID === patient.patientID && (
+                          <p>{patient?.patientFile || "No file available"}</p>
+                        )}
+                      </div>
+                    </div>
+
                     <div className="small-icons item">
                       <img src="./note.png" alt="" />
                       <img src="./ashbin.png" alt="" />
