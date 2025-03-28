@@ -21,13 +21,12 @@ const startServer = async () => {
   try {
     const db = await connectDB();
     const collections = await db.listCollections().toArray();
-    // db.createCollection("patients");
-    // db.patients.insertOne({ name: "Test Patient", age: 30 });
+   
 
-    // 打印所有集合名称
+    
     console.log("Collections in the database:");
     collections.forEach((collection) => {
-      console.log(collection.name); // 打印集合名称
+      console.log(collection.name); // // print every collection
     });
   } catch (err) {
     console.error("Database connection failed:", err);

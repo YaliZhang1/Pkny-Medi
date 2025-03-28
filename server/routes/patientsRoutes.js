@@ -5,10 +5,18 @@ import {
   deletePatient,
   updatePatientById,
   getPatientById,
+  getAllPatients
 } from "../models/patients.js";
 
 const router = express.Router();
-
+router.get("/", async (req, res) => {
+  try {
+    const patients = await getAllPatients();
+    res.json({ success: true, patients });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 router.post("/", async (req, res) => {
   try {
     const { registered, patientName, patientID, patientFile } = req.body;
@@ -31,7 +39,7 @@ router.post("/", async (req, res) => {
       patientID,
       patientFile,
     });
-    patients.push(newPatient);
+
     console.log("New patient added:", newPatient);
     res.status(201).json({ message: "Add new patient", patient: newPatient });
   } catch (error) {
@@ -55,6 +63,7 @@ router.delete("/", async (req, res) => {
     res.status(500).json({ error: error.message, error: err });
   }
 });
+
 
 router.put("/", async (req, res) => {
   try {

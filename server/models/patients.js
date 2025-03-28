@@ -1,5 +1,12 @@
 import { connectDB } from "../config/db.js";
 
+export const getAllPatients = async () => {
+  const db = await connectDB();
+  const collection = db.collection("patients");
+  const patients = await collection.find({}).toArray();
+  return patients;
+};
+
 export const createPatient = async ({
   registered,
   patientName,
@@ -9,7 +16,7 @@ export const createPatient = async ({
   console.log("I am here- createPatient function is running");
   const db = await connectDB();
   const collection = db.collection("patients");
- 
+  console.log(collection);
   const newPatient = {
     registered,
     patientName,
