@@ -1,79 +1,126 @@
 import React, { useState, useEffect } from "react";
-import { getPatients } from "../../src/api/fetchPatients";
+
+import { fetchPatientsData } from "../../src/api/fetchPatientsData";
+import { addPatient } from "../../src/api/addPatient";
 import "../styles/patientForm.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Modal from "../components/ui/modal";
 
 export default function PatientForm({ onAddPatient }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [allPatients, setAllPatients] = useState({});
+  console.log("PatientForm rendered");
+
   const [patient, setPatient] = useState({
-    name: "",
-    location: {
-      postcode: "",
-    },
+    patientName: "",
+    patientID: "",
+    patientFile: "",
     dateHour: new Date(), //Initially the current time
   });
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
-  const handleChangeName = (e) => {
-    setPatient({
-      ...patient,
-      [e.target.name]: e.target.value,
-    });
-  };
-  const handleChangeNumber = (e) => {
-    const postcodeValue = e.target.value;
-    setPatient(prevPatient => ({
-      ...prevPatient,
-      location: {
-        ...prevPatient.location,
-        postcode: postcodeValue
-      }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPatient((prev) => ({
+      ...prev,
+      [name]: value,
     }));
   };
-  const handleDateChange = (date) => {
+  const handleChangeNumber = (e) => {
     setPatient({
       ...patient,
-      dateHour: date, // Store Date objects
+      patientID: e.target.value, // Direct modification the patientID
     });
+  };
+
+  const handleDateChange = (date) => {
+    setPatient((prev) => ({
+      ...prev,
+      dateHour: date,
+    }));
     setIsDatePickerOpen(false);
   };
 
-  const handleAddPatient = () => {
-    if (!patient.name || !patient.location.postcode || !patient.dateHour) {
+  const handleAddNewPatient = async () => {
+    if (
+      !patient?.patientName?.trim() ||
+      !patient?.patientID?.trim() ||
+      !patient?.patientFile?.trim()
+    ) {
       alert("Please fill in complete patient information");
       return;
     }
 
-    // 💡 Make sure the format is correct and convert to ISO standard format
-    const formattedDate = patient.dateHour.toISOString();
+    const formattedDate = patient.dateHour
+      ? new Date(patient.dateHour).toISOString()
+      : new Date().toISOString();
 
     const newPatient = {
-      name: { first: patient.name, last: "" },
-      location: { postcode: patient.location.postcode },
-      registered: { date: formattedDate }, // Save to database format
+      patientName: patient.patientName.trim(),
+      patientID: patient.patientID.trim(),
+      patientFile: patient.patientFile.trim(),
+      registered: { date: formattedDate },
     };
 
-    onAddPatient(newPatient); // Call the method passed by `Dashboard` to update the data
-    setPatient({ name: "", location: { postcode: "" }, dateHour: new Date() }); // Clear input box
+    try {
+      const result = await addPatient(newPatient); // Call API to send data
+    
+      if (result.success) {
+        alert("Patient added successfully!");
+
+        // Re-pull data to ensure data synchronization
+        const updatedPatients = await fetchPatientsData();
+        setAllPatients(updatedPatients);
+
+        // Trigger an update of the parent component (if `onAddPatient` is passed)
+        if (typeof onAddPatient === "function") {
+          onAddPatient(newPatient);
+        }
+      } else {
+        alert(`Failed to add patient: ${result.message || "Unknown error"}`);
+      }
+    } catch (error) {
+      console.error("Error adding patient:", error);
+      alert("Something went wrong. Please try again.");
+    }
+
+    // Clear form
+    setPatient({
+      patientName: "",
+      patientID: "",
+      patientFile: "",
+      dateHour: new Date(),
+    });
   };
+
   return (
     <div className="taskListsContainer">
       <div className="taskLists">
         <input
           type="text"
-          name="name"
+          name="patientName"
           className="taskItem"
           placeholder="Patient's Name"
-          value={patient.name}
-          onChange={handleChangeName}
+          value={patient.patientName}
+          onChange={handleChange}
         />
         <input
           type="text"
-          name="postcode"
+          name="patientID"
           className="taskItem"
           placeholder="Patient's Personal Number"
-          value={patient.location.postcode}
+          value={patient.patientID}
           onChange={handleChangeNumber}
+        />
+        <textarea
+         
+          name="patientFile"
+          rows="5"
+          cols="50"
+          className="taskItem"
+          placeholder="Patient's File"
+          value={patient.patientFile}
+          onChange={handleChange}
         />
         <button
           className="datePicker-button taskItem chooseTimeIcon"
@@ -83,7 +130,7 @@ export default function PatientForm({ onAddPatient }) {
         </button>
       </div>
 
-      <button className="button dashboard-button" onClick={handleAddPatient}>
+      <button className="button dashboard-button" onClick={handleAddNewPatient}>
         Add
       </button>
       <Modal

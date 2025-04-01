@@ -97,6 +97,13 @@
           padding-top: 1rem;
           padding-bottom: 1rem;
           .patient-card {
+            .item {
+              .toggleFileButton {
+                .toggleFileIcon {
+                  cursor: pointer;
+                }
+              }
+            }
             .numberForBigView {
               display: none;
             }
@@ -168,6 +175,66 @@
       }
     }
   }
+  .editModal {
+    .modal-content {
+      width: 70%;
+      height: auto;
+      padding: 50px 0px 0px 50px;
+      .modal-close-btn {
+        font-size: 20px;
+        color: #26a196;
+        cursor: pointer;
+        padding: 20px;
+        &:hover {
+          color: rgb(38, 161, 150);
+        }
+      }
+      h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 90%;
+        padding: 20px 0px 40px;
+        label {
+          font-size: 1.2rem;
+        }
+        input,
+        textarea {
+          margin: 10px auto;
+          font-style: italic;
+          width: -webkit-fill-available;
+          padding: 10px 10px;
+          height: 2.32rem;
+          border: solid 1px #ebfdfb;
+          border-radius: 20px;
+          box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+          &:focus {
+            border-color: rgb(38, 161, 150);
+            outline: none;
+          }
+        }
+        textarea {
+          height: 15vh;
+        }
+        .button-group {
+          display: flex;
+          justify-content: center;
+          gap: 3rem;
+          button {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            background-color: #26a196;
+            color: #fff;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
 }
 @media (min-width: 376px) {
   .dashboardPage-container {
@@ -183,7 +250,7 @@
       .pageNavigate {
         .leftNavigationContainer {
           display: flex;
-          gap:8vh;
+          gap: 8vh;
           justify-content: space-between;
           height: 85vh;
           .topList {
