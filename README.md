@@ -2,9 +2,11 @@
 
 This project is a Medical Management System built using:
 
-### Frontend: React, JavaScript
+### Frontend: 
+#### React, JavaScript
 
-### Backend: Express, MongoDB
+### Backend: 
+#### Express, MongoDB
 
 ### Features:
 
@@ -12,7 +14,7 @@ This project is a Medical Management System built using:
 - CRUD operations for patient data
 - HTTP status codes: 500, 400, 404, 200, 201
 
-### accessible:(least 4 sentences, maximum 50)
+### Accessible:(least 4 sentences, maximum 50)
 
 - **Home Page:**
   - Image elements have [alt] attributes.
