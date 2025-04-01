@@ -1,4 +1,5 @@
 import { connectDB } from "../config/db.js";
+import { ObjectId } from "mongodb";
 
 export const getAllPatients = async () => {
   const db = await connectDB();
@@ -29,24 +30,40 @@ export const createPatient = async ({
   return { _id: result.insertedId, ...newPatient };
 };
 
-export const deletePatient = async (patientData) => {
+export const deletePatient = async (id) => {
   const db = await connectDB();
   const collection = db.collection("patients");
-  const result = await collection.deleteOne({ _id: patientData._id });
+
+  const result = await collection.deleteOne({ _id:id });//
   return result.deletedCount > 0;
 };
 
 export const updatePatientById = async (id, updatedData) => {
   const db = await connectDB();
   const collection = db.collection("patients");
-  const result = await collection.updateOne({ _id: id }, { $set: updatedData });
+
+  let patientId;
+  try {
+    patientId = new ObjectId(id);
+  }catch(error){
+    console.error("Invalid patient ID:", id);
+    return null;
+  }
+  const result = await collection.updateOne({ _id: patientId }, { $set: updatedData });
   if (result.matchedCount === 0) return null;
-  return await getPatientById(id);
+  return await getPatientById(patientId);
 };
 
 export const getPatientById = async (id) => {
   const db = await connectDB();
   const collection = db.collection("patients");
-  const patient = await collection.findOne({ _id: id });
+  let patientId;
+  try{
+    patientId = new ObjectId(id);
+  }catch(error){
+    console.error("Invalid patient ID:", id);
+    return null;
+  }
+  const patient = await collection.findOne({ _id: patientId });
   return patient;
 };
