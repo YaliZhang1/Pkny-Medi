@@ -8,20 +8,26 @@ import { CalendarIcon } from "lucide-react";
 import "./Dashboard.css";
 import "../../styles/button.css";
 import Header from "../../components/Header";
-
-import { fetchPatientsData } from "../../api/fetchPatientsData";
-
 import PatientForm from "../../components/PatientForm";
 import LeftNavigation from "../../components/LeftNavigation";
+
+import { fetchPatientsData } from "../../api/fetchPatientsData";
+import { fetchOnePatient } from "../../api/fetchOnePatient";
+import { updatePatient } from "../../api/updatePatient";
+import { deleteOnePatient } from "../../api/deleteOnePatient";
 
 export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
   const [allPatients, setAllPatients] = useState({}); //Store paginated data
   const [patients, setPatients] = useState([]); //Current page data
+
   const [currentPage, setCurrentPage] = useState(1);
   const [personalFileVisible, setPersonalFileVisible] = useState({});
   const [currentPatientID, setCurrentPatientID] = useState(null);
+  const [editingPatient, setEditingPatient] = useState(null); // Stores the currently edited patient data
 
   const pageSize = 5;
   const totalPages = 5;
@@ -54,25 +60,60 @@ export default function Dashboard() {
   const handleAddNewPatient = async (newPatient) => {
     setPatients((prevPatients) => [newPatient, ...prevPatients]);
 
-    // 重新拉取数据，确保数据同步
+    // Re-pull data to ensure data synchronization
     const updatedPatients = await fetchPatientsData();
     setPatients(updatedPatients);
   };
 
   const togglePersonalFile = (patientID) => {
     if (currentPatientID === patientID) {
-    setPersonalFileVisible((prev) => ({
-      ...prev,
-      [patientID]: !prev[patientID], // Toggle the visibility
-    }));
-    
-      setCurrentPatientID(null); // 如果点击的图标已经显示，关闭该病人的文件
+      setPersonalFileVisible((prev) => ({
+        ...prev,
+        [patientID]: !prev[patientID], // Toggle the visibility
+      }));
+
+      setCurrentPatientID(null); //If the clicked icon is already displayed, close the patient's file
     } else {
-      setCurrentPatientID(patientID); // 如果点击的图标是新的病人，显示该病人的文件
+      setCurrentPatientID(patientID); // If the icon clicked is a new patient, display the patient's files
       setPersonalFileVisible((prev) => ({
         ...prev,
         [patientID]: true,
-      }));}
+      }));
+    }
+  };
+  const handleEditPatient = (patient) => {
+    console.log("Editing patient:", patient);
+    setEditingPatient(patient);
+    setIsEditModalOpen(true);
+  };
+  const handleUpdatePatient = async (updatedPatient) => {
+    console.log("Updating patient:", updatedPatient);
+    const result = await updatePatient(updatedPatient._id, updatedPatient);
+    if (result.success) {
+      alert("Patient updated successfully!");
+      const refreshedPatient = await fetchOnePatient(updatedPatient._id);
+      setPatients((prevPatients) =>
+        prevPatients.map((p) =>
+          p.patientID === updatedPatient._id ? refreshedPatient : p
+        )
+      );
+      setIsEditModalOpen(false);
+    } else {
+      alert(`Failed to update patient: ${result.message || "Unknown error"}`);
+    }
+  };
+  const handleDeletePatient = async (patient) => {
+    console.log("Deleting patient:", patient);
+    const result = await deleteOnePatient(patient._id);
+    if (result.success) {
+      alert("Patient deleted successfully!");
+      const updatedPatients = await fetchPatientsData();
+      setPatients(
+        updatedPatients.filter((p) => p.patientID!== patient._id)
+      );
+    } else {
+      alert(`Failed to delete patient: ${result.message || "Unknown error"}`);
+    }
   };
 
   const sortPatientsByTime = (patients) => {
@@ -168,7 +209,7 @@ export default function Dashboard() {
                         className="toggleFileButton"
                       >
                         <img
-                          src="./messages.svg" // 使用相同的图标
+                          src="./messages.svg"
                           alt="Toggle File"
                           className="toggleFileIcon"
                           style={{
@@ -176,9 +217,9 @@ export default function Dashboard() {
                             backgroundColor: personalFileVisible[
                               patient.patientID
                             ]
-                              ? "#FF6B6B" 
-                              : "rgb(38, 161, 150)", 
-                            transition: "filter 0.3s ease", // 平滑过渡
+                              ? "#FF6B6B"
+                              : "rgb(38, 161, 150)",
+                            transition: "filter 0.3s ease",
                           }}
                         />
                       </button>
@@ -186,15 +227,16 @@ export default function Dashboard() {
                       <div
                         style={{
                           position: "absolute",
-                          top: "8vh",
-                          right: "0",
-                          width: "25%",
-                          height: "40%",
+                          // top: "20vh",
+                          bottom: "0.2vh",
+                          right: "12vw",
+                          width: "80%",
+                          height: "20%",
                           backgroundColor: personalFileVisible[
                             patient.patientID
                           ]
                             ? "rgba(240, 240, 240, 0.95)"
-                            : "transparent", // 如果信息不显示，去掉背景色
+                            : "transparent",
                           padding: "10px",
                           borderRadius: "5px",
                           zIndex: 1,
@@ -208,8 +250,26 @@ export default function Dashboard() {
                     </div>
 
                     <div className="small-icons item">
-                      <img src="./note.png" alt="" />
-                      <img src="./ashbin.png" alt="" />
+                      <button
+                        onClick={() => handleEditPatient(patient)}
+                        className="updateButton"
+                      >
+                        <img
+                          src="./note.png"
+                          alt="updatePatient"
+                          className="updatePatientIcon"
+                        />
+                      </button>
+                      <button
+                        onClick={() => handleDeletePatient(patient)}
+                        className="deleteButton"
+                      >
+                        <img
+                          src="./ashbin.png"
+                          alt="deletePatient"
+                          className="deletePatientIcon"
+                        />
+                      </button>
                     </div>
                   </li>
                 ))
@@ -269,6 +329,72 @@ export default function Dashboard() {
               onChange={handleDateChange}
               inline
             />
+          </Modal>
+          <Modal
+            className="editModal"
+            overlayClassName="modalOverlay"
+            isOpen={isEditModalOpen}
+            closeModal={() => setIsEditModalOpen(false)}
+          >
+            <h2>Edit Patient information</h2>
+            {editingPatient ? (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleUpdatePatient(editingPatient);
+                }}
+              >
+                <label>
+                  Patient's Name:
+                  <input
+                    type="text"
+                    value={editingPatient.patientName}
+                    onChange={(e) =>
+                      setEditingPatient((prev) => ({
+                        ...prev,
+                        patientName: e.target.value,
+                      }))
+                    }
+                  />
+                </label>
+                <label>
+                  Personal Number:
+                  <input
+                    type="text"
+                    value={editingPatient.patientID}
+                    onChange={(e) =>
+                      setEditingPatient((prev) => ({
+                        ...prev,
+                        patientID: e.target.value,
+                      }))
+                    }
+                  />
+                </label>
+                <label>
+                  Personal File:
+                  <textarea
+                    value={editingPatient.patientFile}
+                    onChange={(e) =>
+                      setEditingPatient((prev) => ({
+                        ...prev,
+                        patientFile: e.target.value,
+                      }))
+                    }
+                  />
+                </label>
+                <div className="button-group">
+                  <button type="submit">Save Changes</button>
+                  <button
+                    type="button"
+                    onClick={() => setIsEditModalOpen(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <p>Loading...</p>
+            )}
           </Modal>
         </div>
       </div>
