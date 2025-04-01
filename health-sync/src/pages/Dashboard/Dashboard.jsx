@@ -255,7 +255,7 @@ export default function Dashboard() {
                         className="updateButton"
                       >
                         <img
-                          src="./note.png"
+                          src="./Menu-Icon-white.png"
                           alt="updatePatient"
                           className="updatePatientIcon"
                         />
