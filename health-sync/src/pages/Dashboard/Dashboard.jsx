@@ -121,11 +121,7 @@ export default function Dashboard() {
     setIsModalOpen(false);
   };
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-    setPatients(allPatients[page] || []);
-  };
-  console.log({ currentPage });
+
 
   return (
     <div className="dashboardPage-container">
