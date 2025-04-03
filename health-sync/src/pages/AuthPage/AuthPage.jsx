@@ -52,7 +52,7 @@ export default function AuthPage() {
 
   return (
     <div className="page-container2">
-      <div className="tab-buttons">
+      <div className="tab-buttons" >
         <button onClick={() => setIsLogin(true)} className={isLogin ? "active" : ""}>
           Login Form
         </button>
@@ -115,7 +115,7 @@ function LoginForm({ email, setEmail, password, setPassword, handleLogin, inputR
       </div>
 
       <button className="button" onClick={handleLogin}>
-        LOGIN
+        Login
       </button>
     </div>
   );
@@ -143,6 +143,7 @@ function RegisterForm({
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            placeholder="Oscar"
           />
           <h3>Enter Your Work Email:</h3>
           <input
@@ -150,6 +151,7 @@ function RegisterForm({
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            placeholder="oscar@healthsync.com"
           />
           <h3>Set Your Password:</h3>
           <input
@@ -157,6 +159,8 @@ function RegisterForm({
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            placeholder="000000 (6 digits)"
+            pattern="[0-9]{6}"
           />
           <h3>Repeat Your Password:</h3>
           <input
@@ -164,6 +168,8 @@ function RegisterForm({
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
+            placeholder="000000 (6 digits)"
+            pattern="[0-9]{6}"
           />
         </div>
 

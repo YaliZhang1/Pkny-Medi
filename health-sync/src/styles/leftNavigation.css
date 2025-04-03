@@ -27,7 +27,7 @@
         cursor: pointer;
         transition: background-color 0.3s ease, color 0.3s ease;
         &:hover {
-          background-color: rgb(110, 234, 223) !important;
+          background-color: rgb(75, 182, 173) !important;
           border: none;
           color: white;
         }
@@ -37,7 +37,7 @@
 }
 .leftNavigationContainer .topList button.active,
 .leftNavigationContainer .bottomList button.active {
-  background-color: rgb(38, 161, 150) !important;
+  background-color: rgb(31, 126, 118)  !important;
   color: #fff !important;
   img {
     filter:invert(1)

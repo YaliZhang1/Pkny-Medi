@@ -78,7 +78,7 @@
             li {
               color: #26a196;
               font-family: Kufam;
-              font-size: 13px;
+              font-size: 18px;
             }
             .perNum,
             .fullName {
@@ -98,6 +98,7 @@
           padding-bottom: 1rem;
           .patient-card {
             .item {
+              font-size: 16px;
               .toggleFileButton {
                 .toggleFileIcon {
                   cursor: pointer;
@@ -292,9 +293,9 @@
               li {
                 flex: 1;
                 text-align: center;
-                color: #26a196;
+                color: rgb(31, 126, 118);
                 font-family: Kufam, sans-serif;
-                font-size: 13px;
+                font-size: 18px;
               }
               .shortName {
                 display: none;
