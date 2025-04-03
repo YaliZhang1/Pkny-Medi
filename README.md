@@ -2,9 +2,13 @@
 
 This project is a Medical Management System built using:
 
-### Frontend: #### React, JavaScript
+### Frontend:
 
-### Backend: #### Express, MongoDB
+#### React, JavaScript
+
+### Backend:
+
+#### Express, MongoDB
 
 ### Features:
 
@@ -14,7 +18,7 @@ This project is a Medical Management System built using:
 
 ### Accessible:(least 4 sentences, maximum 50)
 
-- Adjusted the contrast between background and foreground colors.Because of this is friendly to the visually impaired.
+- Adjusted the contrast between background and foreground colors. Because this is friendly to the visually impaired.
 - Placeholder for the input field.This will prompt the user to know what to enter in the input field.
 - Different color of the border of the input field when it is clicked. It helps users to know what state the input field currently in.
 - Image elements have [alt] attributes. When the network is not good or the image is not loaded successfully, the user can be prompted to see what information the image displays.
