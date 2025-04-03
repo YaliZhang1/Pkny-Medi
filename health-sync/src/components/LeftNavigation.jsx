@@ -25,7 +25,7 @@ export default function LeftNavigation() {
               handleDashboardClick();
             }}
           >
-            <img src="./dashboardIcon.svg" />
+            <img src="./dashboardIcon.svg" alt="dashboarIcon" />
             Dashboard
           </button>
         </div>
@@ -36,7 +36,8 @@ export default function LeftNavigation() {
               handleAppointmentsClick();
             }}
           >
-            <img src="./appointmentsIcon.svg" /> Appointment
+            <img src="./appointmentsIcon.svg" alt="appointmentsIcon" />{" "}
+            Appointment
           </button>
         </div>
         <div>
@@ -46,31 +47,31 @@ export default function LeftNavigation() {
               handleDoctorsClick();
             }}
           >
-            <img src="./doctorIcon.svg" />
+            <img src="./doctorIcon.svg" alt="doctorIcon" />
             Doctors
           </button>
         </div>
         <div>
           <button>
-            <img src="./pentients.svg" />
+            <img src="./pentients.svg" alt="pentientsIcon" />
             Patients
           </button>
         </div>
         <div>
           <button>
-            <img src="./messages.svg" />
+            <img src="./messages.svg" alt="messagesIcon" />
             Messages
           </button>
         </div>
         <div>
           <button>
-            <img src="./emergency.svg" />
+            <img src="./emergency.svg" alt="emergencyIcon" />
             Emergency
           </button>
         </div>
         <div>
           <button>
-            <img src="./about.svg" />
+            <img src="./about.svg" alt="aboutIcon" />
             About
           </button>
         </div>
@@ -78,18 +79,18 @@ export default function LeftNavigation() {
       <div className="bottomList">
         <div>
           <button>
-            <img src="./setting.svg" />
+            <img src="./setting.svg" alt="settingIcon" />
             Password
           </button>
         </div>
         <div>
           <button>
-            <img src="./helpCenter.svg" alt="" /> Help Center
+            <img src="./helpCenter.svg" alt="helpCenterIcon" /> Help Center
           </button>
         </div>
         <div>
           <button>
-            <img src="./logOut.svg" />
+            <img src="./logOut.svg" alt="logOutIcon" />
             Logout
           </button>
         </div>

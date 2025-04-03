@@ -40,19 +40,12 @@ export default function Dashboard() {
     navigate("/appointmentPage");
   };
 
-  // useEffect(() => {
-  //   setPatients((prev) => {
-  //     const sortedPatients = sortPatientsByTime(prev);
-  //     // 只有在排序后数据发生变化时才更新 state，避免死循环
-  //     return JSON.stringify(prev) === JSON.stringify(sortedPatients) ? prev : sortedPatients;
-  //   });
-  // }, []);
   useEffect(() => {
     const fetchPatients = async () => {
       const data = await fetchPatientsData();
       console.log("Patients fetched:", data);
       setAllPatients(paginateData(data, pageSize));
-      setPatients(data.slice(0, pageSize)); // 只设置当前页的数据
+      setPatients(data.slice(0, pageSize));
     };
     fetchPatients();
   }, []);
@@ -108,24 +101,10 @@ export default function Dashboard() {
     if (result.success) {
       alert("Patient deleted successfully!");
       const updatedPatients = await fetchPatientsData();
-      setPatients(
-        updatedPatients.filter((p) => p.patientID!== patient._id)
-      );
+      setPatients(updatedPatients.filter((p) => p.patientID !== patient._id));
     } else {
       alert(`Failed to delete patient: ${result.message || "Unknown error"}`);
     }
-  };
-
-  const sortPatientsByTime = (patients) => {
-    return [...patients].sort((a, b) => {
-      const timeA = new Date(a.registered.date);
-      const timeB = new Date(b.registered.date);
-      return (
-        timeA.getHours() * 60 +
-        timeA.getMinutes() -
-        (timeB.getHours() * 60 + timeB.getMinutes())
-      );
-    });
   };
 
   const paginateData = (data, size) => {
@@ -158,7 +137,11 @@ export default function Dashboard() {
         <div className="dashboardContent">
           <div className="text-button-group">
             <h1 className="dash">Dashboard</h1>
-            <button className="mobil-menu" onClick={handleMobileMenuClick}>
+            <button
+              className="mobil-menu"
+              aria-label="mobil-menu"
+              onClick={handleMobileMenuClick}
+            >
               <img src="./mobilMenu.svg" alt="" />
             </button>
 
@@ -167,7 +150,10 @@ export default function Dashboard() {
               <p> {selectedDate.toLocaleDateString()}</p>
             </div>
             <div className="calendar">
-              <Button onClick={() => setIsModalOpen(true)}>
+              <Button
+                aria-label="calender"
+                onClick={() => setIsModalOpen(true)}
+              >
                 <CalendarIcon className="calendarIcon" />
               </Button>
             </div>
@@ -207,9 +193,10 @@ export default function Dashboard() {
                       <button
                         onClick={() => togglePersonalFile(patient.patientID)}
                         className="toggleFileButton"
+                        aria-label="toggleFileButton"
                       >
                         <img
-                          src="./messages.svg"
+                          src="./menu-Icon-white.png"
                           alt="Toggle File"
                           className="toggleFileIcon"
                           style={{
@@ -253,9 +240,10 @@ export default function Dashboard() {
                       <button
                         onClick={() => handleEditPatient(patient)}
                         className="updateButton"
+                        aria-label="update-patient-info"
                       >
                         <img
-                          src="./Menu-Icon-white.png"
+                          src="./note.png"
                           alt="updatePatient"
                           className="updatePatientIcon"
                         />
@@ -263,6 +251,7 @@ export default function Dashboard() {
                       <button
                         onClick={() => handleDeletePatient(patient)}
                         className="deleteButton"
+                        aria-label="delete-patient-info"
                       >
                         <img
                           src="./ashbin.png"
@@ -279,7 +268,11 @@ export default function Dashboard() {
                 </p>
               )}
             </ul>
-            <Button className="seeMore button" onClick={handleSeeMoreBtn}>
+            <Button
+              className="seeMore button"
+              aria-labelledby="see-more-content"
+              onClick={handleSeeMoreBtn}
+            >
               See More
             </Button>
           </div>
