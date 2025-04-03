@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { fetchPatientsData } from "../../src/api/fetchPatientsData";
 import { addPatient } from "../../src/api/addPatient";
@@ -8,7 +8,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import Modal from "../components/ui/modal";
 
 export default function PatientForm({ onAddPatient }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [allPatients, setAllPatients] = useState({});
   console.log("PatientForm rendered");
 
@@ -64,7 +63,7 @@ export default function PatientForm({ onAddPatient }) {
 
     try {
       const result = await addPatient(newPatient); // Call API to send data
-    
+
       if (result.success) {
         alert("Patient added successfully!");
 
@@ -113,7 +112,6 @@ export default function PatientForm({ onAddPatient }) {
           onChange={handleChangeNumber}
         />
         <textarea
-         
           name="patientFile"
           rows="5"
           cols="50"
