@@ -65,7 +65,7 @@ This project is a Medical Management System built using:
   3. Compare to Goat Counter.
   - Goat Counter is suitable for personal blogs or small websites that need concise, privacy-friendly traffic statistics, but it is not suitable for systems that need to deeply analyze user behavior, generate customized reports, or meet medical privacy compliance needs. Therefore, Goat Counter not provide enough features to meet my needs.
   4. Compare to Hotjar.
-  - Although Hotjar provides very powerful behavioral analysis tools, I need more stringent data protection measures due to privacy issues and data compliance requirements for medical data. Coupled with Hotjar's performance impact and privacy compliance issues, it not be completely suitable for my doctor management system, especially when sensitive medical data is involved.
+  - Although Hotjar provides very powerful behavioral analysis tools, I need more stringent data protection measures due to privacy issues and data compliance requirements for medical data. Coupled with Hotjar's performance impact and privacy compliance issues, it not be completely suitable for my medical management system, especially when sensitive medical data is involved.
 - When I consider users privacy, I think Analytics has the following advantages which are benefits to my system.
   1. Google Analytics offers IP anonymization, which helps protect user identity by removing the last part of the IP address (e.g., 192.168.1.1 becomes 192.168.1.x).
   2. Data retention settings allow administrators to choose how long data is stored, with options from 14 days to permanent storage, ensuring compliance with GDPR's data retention limitations.
