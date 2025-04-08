@@ -13,5 +13,6 @@ export const getUserByWorkEmail = async (userEmail) => {
   const collection = db.collection("users");
   console.log(userEmail);
   const user = await collection.findOne({ email: userEmail });
+  console.log("User found in DB:", user);
   return user;
 };
