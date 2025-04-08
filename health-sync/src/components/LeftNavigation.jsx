@@ -15,6 +15,11 @@ export default function LeftNavigation() {
     navigate("/doctorsPage");
   };
 
+  const handleLogoutClick = () => {
+    localStorage.removeItem("doctor");
+    navigate("/homePage");
+  };
+  const doctor = JSON.parse(localStorage.getItem("doctor"));
   return (
     <div className="leftNavigationContainer">
       <div className="topList">
@@ -88,8 +93,14 @@ export default function LeftNavigation() {
             <img src="./helpCenter.svg" alt="helpCenterIcon" /> Help Center
           </button>
         </div>
+
         <div>
-          <button>
+          <button
+            className={location.pathname === "/homePage" ? "active" : ""}
+            onClick={() => {
+              handleLogoutClick();
+            }}
+          >
             <img src="./logOut.svg" alt="logOutIcon" />
             Logout
           </button>

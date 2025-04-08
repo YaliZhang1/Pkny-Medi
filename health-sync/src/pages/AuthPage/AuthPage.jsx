@@ -26,6 +26,8 @@ export default function AuthPage() {
     const userResponse = await login(email, password);
 
     if (userResponse.success) {
+      const doctorData = userResponse.user;
+      localStorage.setItem("doctor", JSON.stringify(doctorData)); //save doctor's info to localStorage
       alert(`Hello, welcome back, ${userResponse.user.name}`);
       navigate("/dashboard");
     } else {

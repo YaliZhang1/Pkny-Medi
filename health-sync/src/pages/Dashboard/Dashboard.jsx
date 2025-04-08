@@ -32,6 +32,16 @@ export default function Dashboard() {
   const pageSize = 5;
   const totalPages = 5;
 
+  const doctor = JSON.parse(localStorage.getItem("doctor")); //Get the currently doctor's info from localStorage
+  const doctorName = doctor?.name || "Unknown";
+  const [doctorId, setDoctorId] = useState("");
+  useEffect(() => {
+    const doctor = JSON.parse(localStorage.getItem("doctor"));
+    if (doctor && doctor._id) {
+      setDoctorId(doctor._id);
+    }
+  }, []);
+
   const navigate = useNavigate();
   const handleMobileMenuClick = () => {
     navigate("/mobileMenuPage");
@@ -121,8 +131,6 @@ export default function Dashboard() {
     setIsModalOpen(false);
   };
 
-
-
   return (
     <div className="dashboardPage-container">
       <Header className="headerCell" />
@@ -143,7 +151,10 @@ export default function Dashboard() {
 
             <div className="textContainer">
               <h1>Daily Schedule</h1>
-              <p> {selectedDate.toLocaleDateString()}</p>
+              <p>
+                {selectedDate.toLocaleDateString()} &nbsp;&nbsp; Dr.{" "}
+                {doctorName}
+              </p>
             </div>
             <div className="calendar">
               <Button
