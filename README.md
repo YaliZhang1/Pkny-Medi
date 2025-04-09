@@ -77,3 +77,7 @@ This project is a Medical Management System built using:
 ### threats and vulnerabilities:
 
 at least 2 common threats and vulnerabilities that your project might be vulnerable too. Going into detail over one of them, explaining how you have mitigated yourself against it.(at least 5 sentences, maximum 50)
+
+- 1. The corresponding relationship between doctors and patients. After the current doctor logs in, he/she can only add, delete, update, and check the patients he is responsible for, and cannot act on the patient data of other doctors.
+- I defined a function authenticateDoctor as the middleware.It helps pass the doctorID to the patient parameter, so that all patients with the same doctorID are treated by the same doctor. This doctorID is the ID given to the user(doctor) by the system when he registers.
+- 2.
