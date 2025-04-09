@@ -62,7 +62,6 @@ export default function Dashboard() {
 
   const handleAddNewPatient = async (newPatient) => {
     setPatients((prevPatients) => [newPatient, ...prevPatients]);
-
     // Re-pull data to ensure data synchronization
     const updatedPatients = await fetchPatientsData();
     setPatients(updatedPatients);
