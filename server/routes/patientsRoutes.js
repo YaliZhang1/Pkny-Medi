@@ -1,6 +1,6 @@
 import express from "express";
 import { ObjectId } from "mongodb";
-
+import { authenticateDoctor } from "../middlewares/authenticateDoctor.js";
 import {
   createPatient,
   deletePatient,
@@ -10,17 +10,26 @@ import {
 } from "../models/patients.js";
 
 const router = express.Router();
-router.get("/", async (req, res) => {
+
+router.get("/", authenticateDoctor, async (req, res) => {
   try {
-    const patients = await getAllPatients();
+    const doctorID = req.doctorId;
+    const patients = await getAllPatients(doctorID);
     res.json({ success: true, patients });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
-router.post("/", async (req, res) => {
+router.post("/", authenticateDoctor, async (req, res) => {
   try {
+    const doctorID = req.doctorId;
     const { registered, patientName, patientID, patientFile } = req.body;
+
+    if (!doctorID) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Doctor ID is required" });
+    }
     if (!registered || !patientFile || !patientID || !patientFile.length) {
       return res
         .status(400)
@@ -34,11 +43,15 @@ router.post("/", async (req, res) => {
           "Patient already exists, just modify the information of him/her.",
       });
     }
+
+    console.log(doctorID);
+
     const newPatient = await createPatient({
       registered,
       patientName,
       patientID,
       patientFile,
+      doctorID,
     });
 
     console.log("New patient added:", newPatient);

@@ -9,6 +9,7 @@ export const login = async (email, password) => {
     });
 
     const data = await response.json();
+    console.log("Response Data:", data);
     return {
       success: response.ok,
       user: data.user,

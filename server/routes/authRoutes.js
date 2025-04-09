@@ -18,8 +18,11 @@ router.post("/register", async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await createUser({ name, email, password: hashedPassword });
-
+    const newUser = await createUser({
+      name,
+      email,
+      password: hashedPassword,
+    });
     res.status(201).json({ message: "Registration successful", user: newUser });
   } catch (err) {
     console.error("Server Error:", err);
@@ -30,7 +33,7 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body);
+
     const user = await getUserByWorkEmail(email);
     if (!user) {
       return res.status(401).json({ message: "User not found" });

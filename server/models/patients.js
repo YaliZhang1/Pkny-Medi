@@ -1,10 +1,10 @@
 import { connectDB } from "../config/db.js";
 import { ObjectId } from "mongodb";
 
-export const getAllPatients = async () => {
+export const getAllPatients = async (doctorID) => {
   const db = await connectDB();
   const collection = db.collection("patients");
-  const patients = await collection.find({}).toArray();
+  const patients = await collection.find({ doctorID }).toArray();
   return patients;
 };
 
@@ -13,6 +13,7 @@ export const createPatient = async ({
   patientName,
   patientID,
   patientFile,
+  doctorID,
 }) => {
   console.log("I am here- createPatient function is running");
   const db = await connectDB();
@@ -23,6 +24,7 @@ export const createPatient = async ({
     patientName,
     patientID,
     patientFile,
+    doctorID,
   };
   console.log("New patient data:", newPatient);
   const result = await collection.insertOne(newPatient);
@@ -34,7 +36,7 @@ export const deletePatient = async (id) => {
   const db = await connectDB();
   const collection = db.collection("patients");
 
-  const result = await collection.deleteOne({ _id:id });//
+  const result = await collection.deleteOne({ _id: id }); //
   return result.deletedCount > 0;
 };
 
@@ -45,11 +47,14 @@ export const updatePatientById = async (id, updatedData) => {
   let patientId;
   try {
     patientId = new ObjectId(id);
-  }catch(error){
+  } catch (error) {
     console.error("Invalid patient ID:", id);
     return null;
   }
-  const result = await collection.updateOne({ _id: patientId }, { $set: updatedData });
+  const result = await collection.updateOne(
+    { _id: patientId },
+    { $set: updatedData }
+  );
   if (result.matchedCount === 0) return null;
   return await getPatientById(patientId);
 };
@@ -58,9 +63,9 @@ export const getPatientById = async (id) => {
   const db = await connectDB();
   const collection = db.collection("patients");
   let patientId;
-  try{
+  try {
     patientId = new ObjectId(id);
-  }catch(error){
+  } catch (error) {
     console.error("Invalid patient ID:", id);
     return null;
   }
