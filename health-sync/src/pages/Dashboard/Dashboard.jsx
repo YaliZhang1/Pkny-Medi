@@ -93,6 +93,7 @@ export default function Dashboard() {
     const result = await updatePatient(updatedPatient._id, updatedPatient);
     if (result.success) {
       alert("Patient updated successfully!");
+      window.gtag("event", "edit_patient_info");
       const refreshedPatient = await fetchOnePatient(updatedPatient._id);
       setPatients((prevPatients) =>
         prevPatients.map((p) =>
@@ -150,7 +151,7 @@ export default function Dashboard() {
 
             <div className="textContainer">
               <h1>Daily Schedule</h1>
-              <p>
+              <p className="date-name">
                 {selectedDate.toLocaleDateString()} &nbsp;&nbsp; Dr.{" "}
                 {doctorName}
               </p>

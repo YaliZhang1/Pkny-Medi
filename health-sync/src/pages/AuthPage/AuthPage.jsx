@@ -29,11 +29,13 @@ export default function AuthPage() {
       const doctorData = userResponse.user;
       localStorage.setItem("doctor", JSON.stringify(doctorData)); //save doctor's info to localStorage
       alert(`Hello, welcome back, ${userResponse.user.name}`);
+      window.gtag("event", "doctor_login");
       navigate("/dashboard");
     } else {
       alert(
         userResponse.message || "Invalid email or password. Please try again."
       );
+      window.gtag("event", "doctor_error_login");
       setPassword("");
       if (inputRef.current) inputRef.current.focus();
     }
