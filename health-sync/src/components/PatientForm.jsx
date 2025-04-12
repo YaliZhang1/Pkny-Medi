@@ -66,7 +66,7 @@ export default function PatientForm({ onAddPatient }) {
 
       if (result.success) {
         alert("Patient added successfully!");
-        window.gtag('event','edit_patient');
+        window.gtag("event", "add_patient");
         // Re-pull data to ensure data synchronization
         const updatedPatients = await fetchPatientsData();
         setAllPatients(updatedPatients);

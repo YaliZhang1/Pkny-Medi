@@ -42,6 +42,12 @@
             color: #555b6c;
             font-size: 20px;
             font-weight: bold;
+            padding: 5px 15px;
+          }
+          .date-name {
+            background-color: rgb(235, 253, 251);
+            padding: 5px 15px;
+            border-radius: 25px;
           }
         }
         .calendar {
@@ -123,6 +129,12 @@
             .small-icons {
               display: flex;
               gap: 5px;
+              .updateButton,
+              .deleteButton {
+                &:hover {
+                  cursor: pointer;
+                }
+              }
             }
           }
         }
