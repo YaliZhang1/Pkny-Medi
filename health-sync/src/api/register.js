@@ -1,4 +1,4 @@
-export const register= async (formData) => {
+export const register = async (formData) => {
   try {
     const response = await fetch("http://localhost:3001/auth/register", {
       method: "POST",
@@ -9,9 +9,24 @@ export const register= async (formData) => {
     });
 
     const data = await response.json();
-    return { success: response.ok, message: data.message, error: data.error };  
+    if (!response.ok) {
+      alert("Registration failed:", data.message || "Registration failed");
+      return {
+        success: false,
+        message: data.message || "Registration failed",
+        error: data.error || "Unknown error",
+      };
+    }
+    return {
+      success: true,
+      message: data.message || "Registration successful",
+      error: null,
+    };
   } catch (error) {
     console.error("Error:", error);
-    return { success: false, error: "Something went wrong. Please try again later." };
+    return {
+      success: false,
+      error: "Something went wrong. Please try again later.",
+    };
   }
 };

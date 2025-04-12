@@ -8,7 +8,7 @@ import { login } from "../../api/login";
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
-  // const [code, setCode] = useState("");
+  const [registrationCode, setRegistrationCode] = useState(""); // For registration
   const [name, setName] = useState(""); // For registration
   const [password, setPassword] = useState(""); // For registration
   const [confirmPassword, setConfirmPassword] = useState(""); // For registration
@@ -42,6 +42,12 @@ export default function AuthPage() {
   };
 
   const handleRegister = async () => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@healthsync\.com$/;
+    if (!emailRegex.test(email)) {
+      alert("Email must end with @healthsync.com");
+      return;
+    }
+    
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       return;
@@ -52,12 +58,11 @@ export default function AuthPage() {
       return;
     }
 
-    const userData = { name, email, password };
+    const userData = { registrationCode, name, email, password };
     const userResponse = await register(userData);
 
     if (userResponse.success) {
-      alert("Registration successful!");
-      navigate("/dashboard");
+      alert("Registration successful! Please go to Login Form to Login");
     } else {
       alert(userResponse.message || "Registration failed. Please try again.");
     }
@@ -93,6 +98,8 @@ export default function AuthPage() {
         />
       ) : (
         <RegisterForm
+          registrationCode={registrationCode}
+          setRegistrationCode={setRegistrationCode}
           name={name}
           setName={setName}
           email={email}
@@ -154,6 +161,8 @@ function LoginForm({
 }
 
 function RegisterForm({
+  registrationCode,
+  setRegistrationCode,
   name,
   setName,
   email,
@@ -179,39 +188,53 @@ function RegisterForm({
           <p>Welcome! Create a new account.</p>
         </div>
         <div className="inputBox">
+          <h3>Enter Your Registration Code:</h3>
+          <input
+            type="text"
+            value={registrationCode}
+            onChange={(e) => setRegistrationCode(e.target.value.replace(/\s+/g, ""))}
+            required
+            placeholder="Enter 12-character code"
+            maxLength={12}
+          />
           <h3>Enter Your User Name:</h3>
           <input
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setName(e.target.value.replace(/\s+/g, ""))}
             required
-            placeholder="Oscar"
+            placeholder="Your Name"
           />
           <h3>Enter Your Work Email:</h3>
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => 
+              setEmail(e.target.value.replace(/\s+/g, ""))}
             required
-            placeholder="oscar@healthsync.com"
+            placeholder="xxx@healthsync.com"
+            pattern="^[a-zA-Z0-9._%+-]+@healthsync\.com$"
+            title="Email must end with @healthsync.com"
           />
           <h3>Set Your Password:</h3>
           <input
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value.replace(/\s+/g, ""))}
             required
             placeholder="000000 (6 digits)"
-            pattern="[0-9]{6}"
+            pattern="^\d{6}$"
+            title="Password must be exactly 6 digits"
           />
           <h3>Repeat Your Password:</h3>
           <input
             type="password"
             value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            onChange={(e) => setConfirmPassword(e.target.value.replace(/\s+/g, ""))}
             required
             placeholder="000000 (6 digits)"
-            pattern="[0-9]{6}"
+            pattern="^\d{6}$"
+            title="Password must be exactly 6 digits"
           />
         </div>
         <button className="button" type="submit">
