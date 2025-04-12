@@ -94,9 +94,12 @@ This project is a Medical Management System built using:
 
 (at least 2 common threats and vulnerabilities that your project might be vulnerable too. Going into detail over one of them, explaining how you have mitigated yourself against it.(at least 5 sentences, maximum 50))
 
-- 1. The corresponding relationship between doctors and patients. After the current doctor logs in, he/she can only add, delete, update, and check the patients he is responsible for. He/She cannot act on the patient data of other doctors.
-- I defined a function authenticateDoctor as the middleware. It helps pass the doctorID to the patient parameter, so that all patients with the same doctorID are treated by the same doctor. This doctorID is the ID given to the user(doctor) by the system when he registers.
-- 2. To prevent anyone from registering as a doctor in the system, I have designed a registration code that users must enter when they first register to become a doctor.
-- These registration codes can only be used once; if they have already been used, they will become invalid. Therefore, I created a new collection called code_registration in my MongoDB to store these registration codes.
-- These codes will only be randomly generated once during the initial setup and saved in the MongoDB. On subsequent runs of the program, it will check if these registration codes already exist and will not generate new ones.
-- It is important to note that after adding this feature, related status and code must also be added to both the front-end and back-end APIs.
+- The corresponding relationship between doctors and patients. After the current doctor logs in, he/she can only add, delete, update, and check the patients he is responsible for. He/She cannot act on the patient data of other doctors.
+
+  1. I defined a function authenticateDoctor as the middleware. It helps pass the doctorID to the patient parameter, so that all patients with the same doctorID are treated by the same doctor. This doctorID is the ID given to the user(doctor) by the system when he registers.
+
+- To prevent anyone from registering as a doctor in the system, I have designed a registration code that users must enter when they first register to become a doctor.
+
+  1. These registration codes can only be used once; if they have already been used, they will become invalid. Therefore, I created a new collection called code_registration in my MongoDB to store these registration codes.
+  2. These codes will only be randomly generated once during the initial setup and saved in the MongoDB. On subsequent runs of the program, it will check if these registration codes already exist and will not generate new ones.
+  3. It is important to note that after adding this feature, related status and code must also be added to both the front-end and back-end APIs.
