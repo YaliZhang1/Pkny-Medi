@@ -1,20 +1,45 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import { getUserByWorkEmail, createUser } from "../models/user.js";
-
+import {
+  getRegistrationCode,
+  markRegistrationCodeAsUsed,
+} from "../models/registrationCode.js";
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
+  const { registrationCode, name, email, password } = req.body;
   try {
-    const { name, email, password } = req.body;
-
-    if (!name || !email || !password) {
-      return res.status(400).json({ message: "All fields are required" });
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@healthsync\.com$/;
+    const codeEntry = await getRegistrationCode(registrationCode);
+    if (!codeEntry) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid or used registration code" });
+    }
+    const success = await markRegistrationCodeAsUsed(registrationCode);
+    if (!success) {
+      console.warn("Registration code could not be marked as used");
+    }
+    if (!registrationCode || !name || !email || !password) {
+      return res
+        .status(400)
+        .json({ success: false, message: "All fields are required" });
     }
 
+    if (!emailRegex.test(email)) {
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message: "Email must be a valid @healthsync.com address",
+        });
+    }
     const existingUser = await getUserByWorkEmail(email);
     if (existingUser) {
-      return res.status(400).json({ message: "Email is already registered" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Email is already registered" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -23,10 +48,14 @@ router.post("/register", async (req, res) => {
       email,
       password: hashedPassword,
     });
-    res.status(201).json({ message: "Registration successful", user: newUser });
+    res.status(201).json({
+      success: true,
+      message: "Registration successful",
+      user: newUser,
+    });
   } catch (err) {
     console.error("Server Error:", err);
-    res.status(500).json({ message: err.message, error: err });
+    res.status(500).json({ success: false, message: err.message, error: err });
   }
 });
 
