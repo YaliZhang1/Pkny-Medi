@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import MobileMenuPage from "./pages/MobileMenuPage/MobileMenuPage";
 import AppointmentPage from "./pages/AppointmentPage/AppointmentPage";
 import DoctorsPage from "./pages/DoctorsPage/DoctorsPage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage/PrivacyPolicyPage";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/mobileMenuPage" element={<MobileMenuPage />} />
           <Route path="/appointmentPage" element={<AppointmentPage />} />
           <Route path="/doctorsPage" element={<DoctorsPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
         </Routes>
       </div>
     </Router>

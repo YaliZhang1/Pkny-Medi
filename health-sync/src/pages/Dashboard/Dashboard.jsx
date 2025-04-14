@@ -106,10 +106,16 @@ export default function Dashboard() {
     }
   };
   const handleDeletePatient = async (patient) => {
-    console.log("Deleting patient:", patient);
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete the patient "${patient.patientName}"?`
+    );
+    if (!confirmDelete) {
+      return;
+    }
     const result = await deleteOnePatient(patient._id);
     if (result.success) {
       alert("Patient deleted successfully!");
+      window.gtag("event", "delete_patient_info");
       const updatedPatients = await fetchPatientsData();
       setPatients(updatedPatients.filter((p) => p.patientID !== patient._id));
     } else {

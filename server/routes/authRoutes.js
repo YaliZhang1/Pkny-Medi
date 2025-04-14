@@ -5,6 +5,7 @@ import {
   getRegistrationCode,
   markRegistrationCodeAsUsed,
 } from "../models/registrationCode.js";
+import { Timestamp } from "mongodb";
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
@@ -28,12 +29,10 @@ router.post("/register", async (req, res) => {
     }
 
     if (!emailRegex.test(email)) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Email must be a valid @healthsync.com address",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Email must be a valid @healthsync.com address",
+      });
     }
     const existingUser = await getUserByWorkEmail(email);
     if (existingUser) {
@@ -47,6 +46,8 @@ router.post("/register", async (req, res) => {
       name,
       email,
       password: hashedPassword,
+      timestamp: new Date(),
+      clientIp: req.ip,
     });
     res.status(201).json({
       success: true,

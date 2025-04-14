@@ -15,7 +15,6 @@ export const createPatient = async ({
   patientFile,
   doctorID,
 }) => {
-  console.log("I am here- createPatient function is running");
   const db = await connectDB();
   const collection = db.collection("patients");
   console.log(collection);
