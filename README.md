@@ -77,18 +77,17 @@ This project is a Medical Management System built using:
 - Why I used it?
   1. Most features are available in the free version.
   2. Compare to Counter.dev.
-  - User authentication: I need to track user login, error login and add new patient events, which Counter.dev cannot support well.
-  - User behavior analysis: I need to track how doctors interact with patient information, such as editing patient information. Counter.dev cannot provide this kind of in-depth data tracking.
+  - User authentication: I need to track login, failed login, and add-patient events, which Counter.dev does not support well.
+  - User behavior analysis: I need to track how doctors interact with patient data, such as editing information, which Counter.dev cannot handle.
   3. Compare to Goat Counter.
-  - Goat Counter is suitable for personal blogs or small websites that need concise, privacy-friendly traffic statistics, but it is not suitable for systems that need to deeply analyze user behavior, generate customized reports, or meet medical privacy compliance needs. Therefore, Goat Counter not provide enough features to meet my needs.
+  - Goat Counter is suitable for blogs or simple websites, but lacks deep behavioral tracking, custom reports, and compliance features required in medical systems.
   4. Compare to Hotjar.
-  - Although Hotjar provides very powerful behavioral analysis tools, I need more stringent data protection measures due to privacy issues and data compliance requirements for medical data. Coupled with Hotjar's performance impact and privacy compliance issues, it not be completely suitable for my medical management system, especially when sensitive medical data is involved.
+  - Though powerful in behavior analysis, Hotjar raises concerns about data privacy and performance, making it less suitable for sensitive medical systems.
 - When I consider users privacy, I think Analytics has the following advantages which are benefits to my system.
-  1. Google Analytics offers IP anonymization, which helps protect user identity by removing the last part of the IP address (e.g., 192.168.1.1 becomes 192.168.1.x).Just add {'anonymize_ip': true} to the head of index.html.
-  2. Data retention settings allow administrators to choose how long data is stored, with options from 14 days to permanent storage, ensuring compliance with GDPR's data retention limitations. I set the time to 14 months.
-  3. Google Analytics allows users to control data sharing, including disabling sharing with other Google services like Ads or BigQuery, to prevent data leakage. I set all the data sharing settings to false. Turn off the Google Signals.
-  4. To comply with GDPR, Google Analytics encourages integrating a consent management platform (CMP) for obtaining user consent before collecting data. I used Cookiebot here.
-  <!-- 5. Google Analytics uses cookies (\_ga, \_gid) to track user behavior, and under GDPR, user consent is required for cookie use, with Google providing guidance for compliance. -->
+  1. Google Analytics offers IP anonymization, which helps protect user identity by removing the last part of the IP address (e.g., 192.168.1.1 becomes 192.168.1.x). GA4 enables IP anonymization by default.
+  2. Data retention: I set it to 14 months, aligning with GDPR rules.
+  3. Data sharing control: All data sharing options are disabled, including Google Signals, to avoid leakage.
+  4. To comply with GDPR, I implemented a custom consent mechanism that requires users to agree to the use of them before any data is collected.
 
 ### threats and vulnerabilities:
 
@@ -103,3 +102,5 @@ This project is a Medical Management System built using:
   1. These registration codes can only be used once; if they have already been used, they will become invalid. Therefore, I created a new collection called code_registration in my MongoDB to store these registration codes.
   2. These codes will only be randomly generated once during the initial setup and saved in the MongoDB. On subsequent runs of the program, it will check if these registration codes already exist and will not generate new ones.
   3. It is important to note that after adding this feature, related status and code must also be added to both the front-end and back-end APIs.
+
+- I add a confirmation window before deleting a patient(confirm the delete operation).To prevent users from accidentally deleting patient information.
