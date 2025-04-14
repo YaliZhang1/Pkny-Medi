@@ -19,7 +19,7 @@ export const register = async (formData) => {
     }
     return {
       success: true,
-      message: data.message || "Registration successful",
+      message: "Registration successful",
       error: null,
     };
   } catch (error) {

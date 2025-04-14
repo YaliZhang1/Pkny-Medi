@@ -4,6 +4,7 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../api/register";
 import { login } from "../../api/login";
+import { Link } from "react-router-dom";
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -15,6 +16,9 @@ export default function AuthPage() {
   const inputRef = useRef(null);
   const navigate = useNavigate();
   const [consentGiven, setConsentGiven] = useState(false);
+  const handlePrivacyPolicyPageClick = () => {
+    navigate("/privacyPolicyPage");
+  };
 
   const handleLogin = async () => {
     if (password.length !== 6) {
@@ -47,7 +51,7 @@ export default function AuthPage() {
       alert("Email must end with @healthsync.com");
       return;
     }
-    
+
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       return;
@@ -192,7 +196,9 @@ function RegisterForm({
           <input
             type="text"
             value={registrationCode}
-            onChange={(e) => setRegistrationCode(e.target.value.replace(/\s+/g, ""))}
+            onChange={(e) =>
+              setRegistrationCode(e.target.value.replace(/\s+/g, ""))
+            }
             required
             placeholder="Enter 12-character code"
             maxLength={12}
@@ -209,8 +215,7 @@ function RegisterForm({
           <input
             type="email"
             value={email}
-            onChange={(e) => 
-              setEmail(e.target.value.replace(/\s+/g, ""))}
+            onChange={(e) => setEmail(e.target.value.replace(/\s+/g, ""))}
             required
             placeholder="xxx@healthsync.com"
             pattern="^[a-zA-Z0-9._%+-]+@healthsync\.com$"
@@ -230,7 +235,9 @@ function RegisterForm({
           <input
             type="password"
             value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value.replace(/\s+/g, ""))}
+            onChange={(e) =>
+              setConfirmPassword(e.target.value.replace(/\s+/g, ""))
+            }
             required
             placeholder="000000 (6 digits)"
             pattern="^\d{6}$"
@@ -249,8 +256,15 @@ function RegisterForm({
             onChange={(e) => setConsentGiven(e.target.checked)}
           />
           <label for="gdpr-consent">
-            I agree <a href="/privacy-policy">the privacy policy</a> and allow
-            my personal data to be stored.
+            I agree
+            <Link
+              to="/privacy-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              the privacy policy
+            </Link>{" "}
+            and allow my personal data to be stored.
           </label>
         </div>
       </form>
