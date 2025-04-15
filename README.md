@@ -1,5 +1,5 @@
 # Medical Management System
-## To preserve my previous front-end project, I’ve created a new branch called mongoDB for this assignment. Please refer to the mongoDB branch for the relevant code.
+### This assignment is developed on a branch named mongoDB, based on my previous front-end project. Please refer to the mongoDB branch for the relevant code.
 This project is a Medical Management System built using:
 
 ### Frontend:
