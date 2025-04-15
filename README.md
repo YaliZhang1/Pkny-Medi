@@ -1,5 +1,5 @@
 # Medical Management System
-
+## To preserve my previous front-end project, I’ve created a new branch called mongoDB for this assignment. Please refer to the mongoDB branch for the relevant code.
 This project is a Medical Management System built using:
 
 ### Frontend:
@@ -28,11 +28,7 @@ This project is a Medical Management System built using:
 1. cd server
 2. node app.js
 
-<!-- - For get an temporary url for testing, (Because Cookiebot doesn't accept localhost)run:
 
-1. npm install -g localtunnel
-2. lt --port 3000
-   It will give you a link like: https://long-jars-search.loca.lt. (This is a temporary link, every time will give you different one.)This one just for test Google Analytics integrating a consent management platform (CMP) for obtaining user consent before collecting data. I used Cookiebot here. -->
 
 ### Accessible:
 
