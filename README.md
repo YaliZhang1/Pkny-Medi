@@ -100,7 +100,7 @@ This project is a Medical Management System built using:
   3. It is important to note that after adding this feature, related status and code must also be added to both the front-end and back-end APIs.
 
 - I add a confirmation window before deleting a patient(confirm the delete operation).To prevent users from accidentally deleting patient information.
-
+<pre> \`\`\`
 PKNY MEDI/
 ├── .git/ ← Git
 ├── health-sync/ ← React Front-end
@@ -146,4 +146,4 @@ PKNY MEDI/
 │── .gitignore/
 │── package-lock.json/
 │── package.json/
-└── README.md/
+└── README.md/\`\`\` </pre>
