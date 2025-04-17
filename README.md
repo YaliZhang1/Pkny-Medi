@@ -1,5 +1,7 @@
 # Medical Management System
-## To preserve my previous front-end project, I’ve created a new branch called mongoDB for this assignment. Please refer to the mongoDB branch for the relevant code.
+
+### This assignment is developed on a branch named mongoDB, based on my previous front-end project. Please refer to the mongoDB branch for the relevant code.
+
 This project is a Medical Management System built using:
 
 ### Frontend:
@@ -27,8 +29,6 @@ This project is a Medical Management System built using:
 
 1. cd server
 2. node app.js
-
-
 
 ### Accessible:
 
@@ -100,3 +100,50 @@ This project is a Medical Management System built using:
   3. It is important to note that after adding this feature, related status and code must also be added to both the front-end and back-end APIs.
 
 - I add a confirmation window before deleting a patient(confirm the delete operation).To prevent users from accidentally deleting patient information.
+
+PKNY MEDI/
+├── .git/ ← Git
+├── health-sync/ ← React Front-end
+│ ├── build/
+│ │ └── static/
+│ │ ├── css/
+│ │ ├── js/
+│ │ └── media/
+│ ├── public/
+│ ├── src/
+│ │ ├── api/
+│ │ ├── assets/
+│ │ │ └── images/
+│ │ ├── components/
+│ │ │ └── ui/
+│ │ ├── pages/
+│ │ │ ├── AppointmentPage/
+│ │ │ ├── AuthPage/
+│ │ │ ├── Dashboard/
+│ │ │ ├── DoctorsPage/
+│ │ │ ├── Home/
+│ │ │ ├── MobileMenuPage/
+│ │ │ └── PrivacyPolicyPage/
+│ │ ├── App.css/
+│ │ ├── App.jsx/
+│ │ ├── index.css/
+│ │ └── index.js/
+│ │── .env/
+│ │── .gitignore/
+│ │── craco.config.js/
+│ │── package-lock.json/
+│ │── package.json/
+│ └── README.md/
+├── server/ ← Express Back-end
+│ ├── config/
+│ ├── middlewares/
+│ ├── models/
+│ ├── routes/
+│ ├── utils/
+│ ├── app.js/
+│ ├── package-lock.json/
+│ └── package.json/
+│── .gitignore/
+│── package-lock.json/
+│── package.json/
+└── README.md/
