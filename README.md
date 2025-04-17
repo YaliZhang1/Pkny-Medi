@@ -127,13 +127,13 @@ PKNY MEDI/
 │ │ ├── App.css/
 │ │ ├── App.jsx/
 │ │ ├── index.css/
-│ │ ├── index.js/
+│ │ └── index.js/
 │ │── .env/
 │ │── .gitignore/
 │ │── craco.config.js/
 │ │── package-lock.json/
 │ │── package.json/
-│ │── README.md/
+│ └── README.md/
 ├── server/ ← Express Back-end
 │ ├── config/
 │ ├── middlewares/
@@ -146,4 +146,4 @@ PKNY MEDI/
 │── .gitignore/
 │── package-lock.json/
 │── package.json/
-│── README.md/
+└── README.md/

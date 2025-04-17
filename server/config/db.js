@@ -1,7 +1,9 @@
 import { MongoClient } from "mongodb";
+import dotenv from "dotenv";
+dotenv.config();
 
-const url = "mongodb://localhost:27017";
-const dbName = "medicalDatabase";
+const url = process.env.MONGO_URI || "mongodb://localhost:27017";
+const dbName = process.env.DB_NAME || "medicalDatabase";
 let db;
 export const connectDB = async () => {
   if (db) {

@@ -21,6 +21,11 @@
         outline: none;
       }
     }
+    .chooseTimeIcon {
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
   .dashboard-button {
     margin: 30px auto;
