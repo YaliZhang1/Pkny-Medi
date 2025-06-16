@@ -30,6 +30,14 @@ This project is a Medical Management System built using:
 1. cd server
 2. node app.js
 
+### Branch mongoDB include fronted and backend, main branch only have fronted.
+#### Registration Page
+ On the registration page, users are required to enter a Registration Code provided from the database. Registration will only succeed if the code is correct. This measure helps prevent unauthorized users from registering and accessing the system.
+
+- Registration Code Validation: The system automatically verifies whether the entered code exists and is valid in the database during registration.
+- Failure Conditions: If the code is incorrect or invalid, the registration process will be rejected, and the user cannot complete registration.
+- Security Purpose: This approach ensures that only users with a valid code can register, enhancing the overall security of the system.
+
 ### Accessible:
 
 (least 4 sentences, maximum 50)
@@ -100,6 +108,8 @@ This project is a Medical Management System built using:
   3. It is important to note that after adding this feature, related status and code must also be added to both the front-end and back-end APIs.
 
 - I add a confirmation window before deleting a patient(confirm the delete operation).To prevent users from accidentally deleting patient information.
+
+
 
 ```
 PKNY MEDI/
