@@ -33,7 +33,10 @@ export default function AuthPage() {
       const doctorData = userResponse.user;
       localStorage.setItem("doctor", JSON.stringify(doctorData)); //save doctor's info to localStorage
       alert(`Hello, welcome back, ${userResponse.user.name}`);
-      window.gtag("event", "doctor_login");
+      window.gtag("event", "doctor_login",{
+        method: "email", 
+        user_group: "doctor" //or "Admin","Nurse",etc
+      });
       navigate("/dashboard");
     } else {
       alert(
