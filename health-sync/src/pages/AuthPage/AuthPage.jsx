@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { register } from "../../api/register";
 import { login } from "../../api/login";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -16,9 +17,9 @@ export default function AuthPage() {
   const inputRef = useRef(null);
   const navigate = useNavigate();
   const [consentGiven, setConsentGiven] = useState(false);
-  const handlePrivacyPolicyPageClick = () => {
-    navigate("/privacyPolicyPage");
-  };
+  // const handlePrivacyPolicyPageClick = () => {
+  //   navigate("/privacyPolicyPage");
+  // };
 
   const handleLogin = async () => {
     if (password.length !== 6) {
@@ -33,9 +34,9 @@ export default function AuthPage() {
       const doctorData = userResponse.user;
       localStorage.setItem("doctor", JSON.stringify(doctorData)); //save doctor's info to localStorage
       alert(`Hello, welcome back, ${userResponse.user.name}`);
-      window.gtag("event", "doctor_login",{
-        method: "email", 
-        user_group: "doctor" //or "Admin","Nurse",etc
+      window.gtag("event", "doctor_login", {
+        method: "email",
+        user_group: "doctor", //or "Admin","Nurse",etc
       });
       navigate("/dashboard");
     } else {
@@ -166,7 +167,15 @@ function LoginForm({
     </div>
   );
 }
-
+LoginForm.propTypes = {
+  email: PropTypes.string.isRequired,
+  setEmail: PropTypes.func.isRequired,
+  password: PropTypes.string.isRequired,
+  setPassword: PropTypes.func.isRequired,
+  handleLogin: PropTypes.func.isRequired,
+  inputRef: PropTypes.object,
+  
+};
 function RegisterForm({
   registrationCode,
   setRegistrationCode,
@@ -274,3 +283,19 @@ function RegisterForm({
     </div>
   );
 }
+
+RegisterForm.propTypes = {
+  registrationCode: PropTypes.string.isRequired,
+  setRegistrationCode: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  setName: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired,
+  setEmail: PropTypes.func.isRequired,
+  password: PropTypes.string.isRequired,
+  setPassword: PropTypes.func.isRequired,
+  confirmPassword: PropTypes.string.isRequired,
+  setConfirmPassword: PropTypes.PropTypes.func.isRequired,
+  handleRegister: PropTypes.PropTypes.func.isRequired,
+  consentGiven: PropTypes.bool.isRequired,
+  setConsentGiven: PropTypes.func.isRequired,
+};
