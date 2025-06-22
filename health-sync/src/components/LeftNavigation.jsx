@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "../styles/leftNavigation.css";
 import { useNavigate, useLocation } from "react-router-dom";
 export default function LeftNavigation() {
@@ -19,7 +19,7 @@ export default function LeftNavigation() {
     localStorage.removeItem("doctor");
     navigate("/homePage");
   };
-  const doctor = JSON.parse(localStorage.getItem("doctor"));
+  // const doctor = JSON.parse(localStorage.getItem("doctor"));
   return (
     <div className="leftNavigationContainer">
       <div className="topList">

@@ -2,7 +2,6 @@
   "name": "health-sync",
   "version": "0.1.0",
   "private": true,
- 
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^7.0.2",
     "@testing-library/dom": "^10.4.0",
@@ -26,7 +25,8 @@
     "eject": "react-scripts eject",
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test"
+    "test": "craco test",
+    "lint": "eslint src --ext .js,.jsx --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +52,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@craco/craco": "^7.1.0"
+    "@craco/craco": "^7.1.0",
+    "@eslint/js": "^9.29.0",
+    "eslint": "^9.29.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.2.0"
   }
 }

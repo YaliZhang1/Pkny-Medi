@@ -258,7 +258,7 @@ function RegisterForm({
             checked={consentGiven}
             onChange={(e) => setConsentGiven(e.target.checked)}
           />
-          <label for="gdpr-consent">
+          <label htmlFor="gdpr-consent">
             I agree
             <Link
               to="/privacy-policy"
