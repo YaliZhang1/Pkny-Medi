@@ -55,7 +55,7 @@ This project is a Medical Management System built using:
 4. Start Command: node app.js
 5. Environment Variables:
 - Paste the string (MONGO_URI) that you get from MongoDB Atlas to your .env file. You can write PORT=10000, or just not write the PORT, Render will gives one for it.
-6. 
+6. After the back-end deployed, you will get the this link: https://pkny-medi.onrender.com.
 
 
 #### Front-end (Netlify):
@@ -63,6 +63,7 @@ This project is a Medical Management System built using:
 1. Build command: npm run build
 2. Publish directory: health-sync/build (My front-end folder)
 3. Environment variables:
+ - Pasta https://pkny-medi.onrender.com to .env of front-end.
 
 #### Registration Page
 
