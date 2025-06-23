@@ -14,7 +14,7 @@ export default function Home() {
 
       <div className="page-container1">
         <div className="home-header">
-          <img src="./logo.png" />
+          <img src="./logo.png" alt="Health Sync logo" />
           <h1>
             Your National Health Database Fast, Secure, and Easy Access to Care
           </h1>
@@ -28,14 +28,14 @@ export default function Home() {
           </div>
           <div className="pic-button-group">
             <div className="pic-button-container">
-              <img src="./doctor.png"  />
+              <img src="./doctor.png" alt="Doctor icon" />
 
               <button className="button" onClick={handleButtonClick}>
                 MEDICAL STAFF
               </button>
             </div>
             <div className="pic-button-container">
-              <img src="./patient.png" />
+              <img src="./patient.png" alt="Patient icon" />
               <button className="button" onClick={handleButtonClick}>
                 PATIENT
               </button>
