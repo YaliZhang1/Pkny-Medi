@@ -1,6 +1,6 @@
 # Medical Management System
-
-### This assignment is developed on a branch named mongoDB, based on my previous front-end project. Please refer to the mongoDB branch for the relevant code.
+Live preview: https://pkny.netlify.app/
+### This assignment is developed on a branch named mongoDB-deploy-online, based on my previous front-end project. Please refer to the mongoDB-deploy-online branch for the relevant code.
 
 This project is a Medical Management System built using:
 
@@ -30,9 +30,53 @@ This project is a Medical Management System built using:
 1. cd server
 2. node app.js
 
-### Branch mongoDB include fronted and backend, main branch only have fronted.
+### Branch mongoDB-deploy-online include fronted and backend, main branch only have fronted.
+
+### How to deploy the project
+
+#### Deploy MongoDB Atlas:
+
+1. login: https://www.mongodb.com/products/platform/atlas-database
+2. Configurations/ Name:healthsync-dev-cluster (My name of cluster)
+3. Provider: AWS
+4. Copy the string containing the name and the password.
+5. Install the 'MongoDB for VS Code' Extension to your VSCode, paste the string containing the name and the password to command palette in the top.
+6. How to get your MONGO_URI?
+
+- Go in to your Cluster of this project, click the button 'Connect' in the right top conner.
+- Choose 'Connect to your application', click the 'Drivers'.
+- Copy the string who is under 'Use this connection string in your application'.
+
+7. After everything goes well, you could check all of your database in https://cloud.mongodb.com/v2/68590e5400eff66d9cf9e3e2#/metrics/replicaSet/685910c36a10383381db5a80/explorer/medicalDatabase
+
+#### Deploy Back-end (Render):
+
+1. login Render: https://render.com/
+2. Root Directory: server (Which is my back-end folder)
+3. Build Command: npm install
+4. Start Command: node app.js
+5. Environment Variables:
+
+- Paste the string (MONGO_URI) that you get from MongoDB Atlas to your .env file. You can write PORT=10000, or just not write the PORT, Render will gives one for it.
+
+6. After the back-end deployed, you will get the this link: https://pkny-medi.onrender.com.
+
+#### Deploy Front-end (Netlify):
+
+1. npm run build
+2. login Netlify: https://app.netlify.com/
+
+- Branch to deploy: mongoDB-deploy-online
+- Base directory: health-sync
+- Build command: npm run build
+- Publish directory: build
+- Functions directory: (let it empty, because it already deployed separate)
+- Environment variables:
+  Pasta https://pkny-medi.onrender.com to .env of front-end.
+
 #### Registration Page
- On the registration page, users are required to enter a Registration Code provided from the database. Registration will only succeed if the code is correct. This measure helps prevent unauthorized users from registering and accessing the system.
+
+On the registration page, users are required to enter a Registration Code provided from the database. Registration will only succeed if the code is correct. This measure helps prevent unauthorized users from registering and accessing the system.
 
 - Registration Code Validation: The system automatically verifies whether the entered code exists and is valid in the database during registration.
 - Failure Conditions: If the code is incorrect or invalid, the registration process will be rejected, and the user cannot complete registration.
@@ -109,8 +153,6 @@ This project is a Medical Management System built using:
 
 - I add a confirmation window before deleting a patient(confirm the delete operation).To prevent users from accidentally deleting patient information.
 
-
-
 ```
 PKNY MEDI/
 ├── .git/ ← Git
@@ -159,3 +201,4 @@ PKNY MEDI/
 │── package.json/
 └── README.md/
 ```
+
