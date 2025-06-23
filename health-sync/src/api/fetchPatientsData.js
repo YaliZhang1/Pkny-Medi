@@ -3,7 +3,7 @@ export const fetchPatientsData = async () => {
   const doctorId = doctor?._id;
 
   try {
-    const response = await fetch(`http://localhost:3001/patients`, {
+    const response = await fetch(`http://pkny-medi.onrender.com/patients`, {
       headers: {
         "Content-Type": "application/json",
         "doctor-id": doctorId,
