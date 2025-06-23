@@ -2,6 +2,8 @@ import "./MobileMenuPage.css";
 import LeftNavigation from "../../components/LeftNavigation";
 import Header from "../../components/Header";
 import { useNavigate } from "react-router-dom";
+import React from 'react';
+
 
 export default function MobileMenuPage() {
     const navigate = useNavigate();

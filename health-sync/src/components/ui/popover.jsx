@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-
+import PropTypes from "prop-types";
 const Popover = ({ trigger, children }) => {
   const [open, setOpen] = useState(false);
   const popoverRef = useRef(null);
@@ -27,3 +27,7 @@ const Popover = ({ trigger, children }) => {
 };
 
 export default Popover;
+Popover.propTypes = {
+  trigger: PropTypes.node.isRequired,
+  children: PropTypes.node,
+};

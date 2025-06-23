@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-
 import { fetchPatientsData } from "../../src/api/fetchPatientsData";
 import { addPatient } from "../../src/api/addPatient";
 import "../styles/patientForm.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Modal from "../components/ui/modal";
+import PropTypes from 'prop-types';
 
 export default function PatientForm({ onAddPatient }) {
-  const [allPatients, setAllPatients] = useState({});
+  const [, setAllPatients] = useState({});
   console.log("PatientForm rendered");
 
   const [patient, setPatient] = useState({
@@ -153,3 +153,6 @@ export default function PatientForm({ onAddPatient }) {
     </div>
   );
 }
+PatientForm.propTypes = {
+  onAddPatient: PropTypes.func,
+};

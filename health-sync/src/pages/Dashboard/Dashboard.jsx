@@ -16,15 +16,16 @@ import { fetchOnePatient } from "../../api/fetchOnePatient";
 import { updatePatient } from "../../api/updatePatient";
 import { deleteOnePatient } from "../../api/deleteOnePatient";
 
+
 export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  const [allPatients, setAllPatients] = useState({}); //Store paginated data
+  const [, setAllPatients] = useState({}); //Store paginated data
   const [patients, setPatients] = useState([]); //Current page data
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [, setCurrentPage] = useState(1);
   const [personalFileVisible, setPersonalFileVisible] = useState({});
   const [currentPatientID, setCurrentPatientID] = useState(null);
   const [editingPatient, setEditingPatient] = useState(null); // Stores the currently edited patient data
@@ -34,7 +35,7 @@ export default function Dashboard() {
 
   const doctor = JSON.parse(localStorage.getItem("doctor")); //Get the currently doctor's info from localStorage
   const doctorName = doctor?.name || "Unknown";
-  const [doctorId, setDoctorId] = useState("");
+  const [, setDoctorId] = useState("");
   useEffect(() => {
     const doctor = JSON.parse(localStorage.getItem("doctor"));
     if (doctor && doctor._id) {
@@ -176,7 +177,7 @@ export default function Dashboard() {
               <ul className="oneRow">
                 <li>Time</li>
                 <li className="shortName">Name</li>
-                <li className="fullName">Patient's Name</li>
+                <li className="fullName">Patient&apos;s Name</li>
                 <li className="perNum">Personal Number </li>
                 <li>Personal File</li>
                 <li>Actions</li>
@@ -351,7 +352,7 @@ export default function Dashboard() {
                 }}
               >
                 <label>
-                  Patient's Name:
+                  Patient&apos;s Name:
                   <input
                     type="text"
                     value={editingPatient.patientName}
