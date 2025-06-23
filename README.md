@@ -59,10 +59,13 @@ This project is a Medical Management System built using:
 
 
 #### Front-end (Netlify):
-
-1. Build command: npm run build
-2. Publish directory: health-sync/build (My front-end folder)
-3. Environment variables:
+1. 
+Branch to deploy: mongoDB-deploy-online 
+Base directory: health-sync
+Build command: npm run build
+Publish directory: build
+Functions directory: (let it empty, because it already deployed separate)
+2. Environment variables:
  - Pasta https://pkny-medi.onrender.com to .env of front-end.
 
 #### Registration Page
