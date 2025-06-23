@@ -1,6 +1,6 @@
 export const deleteOnePatient = async (id) => {
   try {
-    const response = await fetch(`http://pkny-medi.onrender.com/patients/${id}`, {
+    const response = await fetch(`https://pkny-medi.onrender.com/patients/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

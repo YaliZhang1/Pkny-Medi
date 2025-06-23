@@ -1,6 +1,6 @@
 export const register = async (formData) => {
   try {
-    const response = await fetch("http://pkny-medi.onrender.com/auth/register", {
+    const response = await fetch("https://pkny-medi.onrender.com/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

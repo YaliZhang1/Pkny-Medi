@@ -3,7 +3,7 @@ export const addPatient = async (formData) => {
   const doctorId = doctor?._id;
 
   try {
-    const response = await fetch("http://pkny-medi.onrender.com/patients", {
+    const response = await fetch("https://pkny-medi.onrender.com/patients", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
