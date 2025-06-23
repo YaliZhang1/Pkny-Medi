@@ -1,6 +1,6 @@
 # Medical Management System
-
-### This assignment is developed on a branch named mongoDB, based on my previous front-end project. Please refer to the mongoDB branch for the relevant code.
+Live preview: https://pkny.netlify.app/
+### This assignment is developed on a branch named mongoDB-deploy-online, based on my previous front-end project. Please refer to the mongoDB-deploy-online branch for the relevant code.
 
 This project is a Medical Management System built using:
 
@@ -30,11 +30,11 @@ This project is a Medical Management System built using:
 1. cd server
 2. node app.js
 
-### Branch mongoDB include fronted and backend, main branch only have fronted.
+### Branch mongoDB-deploy-online include fronted and backend, main branch only have fronted.
 
 ### How to deploy the project
 
-#### MongoDB Atlas:
+#### Deploy MongoDB Atlas:
 
 1. login: https://www.mongodb.com/products/platform/atlas-database
 2. Configurations/ Name:healthsync-dev-cluster (My name of cluster)
@@ -47,7 +47,9 @@ This project is a Medical Management System built using:
 - Choose 'Connect to your application', click the 'Drivers'.
 - Copy the string who is under 'Use this connection string in your application'.
 
-#### Back-end (Render):
+7. After everything goes well, you could check all of your database in https://cloud.mongodb.com/v2/68590e5400eff66d9cf9e3e2#/metrics/replicaSet/685910c36a10383381db5a80/explorer/medicalDatabase
+
+#### Deploy Back-end (Render):
 
 1. login Render: https://render.com/
 2. Root Directory: server (Which is my back-end folder)
@@ -59,7 +61,7 @@ This project is a Medical Management System built using:
 
 6. After the back-end deployed, you will get the this link: https://pkny-medi.onrender.com.
 
-#### Front-end (Netlify):
+#### Deploy Front-end (Netlify):
 
 1. npm run build
 2. login Netlify: https://app.netlify.com/
